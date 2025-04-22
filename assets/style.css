@@ -1,6 +1,11 @@
 body{
-    margin: none;
+    margin: 0px;
 
+}
+.main{
+    font-family: sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
 }
 .desconto{
     background-color: #FA77AB;
@@ -13,4 +18,66 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 1rem;
 }
+.nav .logo img{
+    width: 100px;
+    height: 100px;
+}
+.nav .car img{
+    width: 100px;
+    height: 100px;
+}
+.banner{
+    display: flex;
+    flex-direction: row;
+    background-color: #FF9DC4;
+    padding: 1rem;
+    padding-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+   
+  }
+  .product{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card img {
+    width: 200px;
+    height: 200px;
+  }
+  .info {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .info h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .preco {
+    font-weight: bold;
+    color: #2e8b57;
+  }
+  
+  .disponivel {
+    color: green;
+  }
+  
+  .indisponivel {
+    color: red;
+  }  
