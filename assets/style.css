@@ -1,0 +1,16 @@
+body{
+    margin: none;
+
+}
+.desconto{
+    background-color: #FA77AB;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+}
+.nav{
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
