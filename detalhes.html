@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Boneca</title>
+  <link rel="stylesheet" href="assets/detalhes.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+        <div class="desconto"><p>Discount 20% For New Member, ONLY FOR TODAY!!</p></div>
+        <div class="nav">
+            <div class="logo"><img src="assets/images/logo.png" alt=""></div>
+            <div class="car"><img src="assets/images/car.png" alt=""></div>
+        </div>
+    </header>
+    <main>
+        <div class="detalhes" v-if="boneca">
+
+            <div class="img"><img :src="boneca.imagem" :alt="boneca.nome" style="max-width: 300px;"></div>
+            <div> <h1>{{ boneca.nome }}</h1>
+            
+            <p>Preço: R$ {{ boneca.preco.toFixed(2) }}</p>
+            <p>Status: 
+              <span :class="boneca.estoque > 0 ? 'disponivel' : 'indisponivel'">
+                {{ boneca.estoque > 0 ? 'Em estoque' : 'Esgotado' }}
+              </span>
+            </p>
+            <p>{{ boneca.descricao }}</p>
+
+            <div style="margin: 20px 0; display: flex; align-items: center; gap: 10px;">
+              <button @click="decrementar" :disabled="quantidade === 0">-</button>
+              <span>{{ quantidade }}</span>
+              <button @click="incrementar" :disabled="quantidade >= boneca.estoque">+</button>
+            </div>
+
+            <button 
+              @click="adicionarAoCarrinho" 
+              :disabled="quantidade === 0 || boneca.estoque === 0"
+            >
+              Adicionar ao Carrinho
+            </button>
+          
+            <button @click="voltar">Voltar</button>
+          </div>
+        </div>
+           
+    <div v-else>
+      <p>Boneca não encontrada.</p>
+      <button @click="voltar">Voltar</button>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+    <div class="croche">
+      <div class="crochesas">Crochesas</div>
+      <div>
+        <p>WhatsApp: : +62 859 9999 999</p>
+        <p>Email: : hello@modeva.com</p>
+        <p>
+          Adress: : Lorem ipsum street Block B Number 08, Jakarta,
+          Indonesia, 12345
+        </p>
+      </div>
+    </div>
+    <div class="Adress">
+      <div class="text">
+        <h3>Menu</h3>
+        <p>Sale</p>
+        <p>New arrivals</p>
+        <p>Formal Man</p>
+        <p>Formal Woman</p>
+        <p>Casual Men </p>
+      </div>
+      <div class="text">
+        <h3>Get Help</h3>
+        <p>FAQ</p>
+        <p>Customer Service</p>
+        <p>Refund and return</p>
+        <p>Terms and Conditions</p>
+      </div>
+      <div class="text">
+        <h3>Account</h3>
+        <p>My Account</p>
+        <p>My Orders</p>
+        <p>Vouchers and Discounts</p>
+      </div>
+    </div>
+  </footer>
+
+   <script>
+
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        boneca: null,
+        quantidade: 0,
+        todasBonecas: [
+          { nome: 'Ariel', preco: 89.90, imagem: 'assets/images/ariel.png', estoque: 5, descricao: `História/Origem: Ariel é uma sereia curiosa...` },
+          { nome: 'Bela', preco: 99.90, imagem: 'assets/images/bela.png', estoque: 0, descricao: 'História/Origem: Bela é uma jovem...' },
+          { nome: 'Cinderela', preco: 89.90, imagem: 'assets/images/cinderela.png', estoque: 3, descricao: 'Cinderela vive com a madrasta...' },
+          { nome: 'Aurora', preco: 109.90, imagem: 'assets/images/aurora.png', estoque: 2, descricao: 'História/Origem: Aurora é uma princesa...' },
+          { nome: 'Branca de Neve', preco: 109.90, imagem: 'assets/images/brancadeneve.png', estoque: 4, descricao: 'História/Origem: A rainha malvada...' },
+          { nome: 'Rapunzel', preco: 95.90, imagem: 'assets/images/rapunzel.png', estoque: 1, descricao: 'História/Origem: Rapunzel é uma princesa...' },
+          { nome: 'Jasmine', preco: 89.90, imagem: 'assets/images/jasmine.png', estoque: 0, descricao: 'História/Origem: Jasmine é a princesa...' },
+          { nome: 'Merida', preco: 99.90, imagem: 'assets/images/merida.png', estoque: 2, descricao: 'História/Origem: Merida é a princesa...' },
+          { nome: 'Mulan', preco: 109.90, imagem: 'assets/images/mulan.png', estoque: 3, descricao: 'História/Origem: Mulan é uma jovem chinesa...' },
+          { nome: 'Tiana', preco: 89.90, imagem: 'assets/images/tiana.png', estoque: 5, descricao: 'História/Origem: Tiana é uma jovem trabalhadora...' }
+        ]
+      };
+    },
+    methods: {
+      voltar() {
+        window.history.back();
+      },
+      getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      },
+      incrementar() {
+        if (this.quantidade < this.boneca.estoque) {
+          this.quantidade++;
+        }
+      },
+      decrementar() {
+        if (this.quantidade > 0) {
+          this.quantidade--;
+        }
+      },
+      adicionarAoCarrinho() {
+        if (this.quantidade > 0 && this.boneca.estoque >= this.quantidade) {
+          alert(`${this.quantidade}x ${this.boneca.nome} adicionada(s) ao carrinho!`);
+          this.quantidade = 0; // reseta após adicionar
+        }
+      }
+    },
+    mounted() {
+      const nomeBoneca = this.getQueryParam('nome');
+      this.boneca = this.todasBonecas.find(b => b.nome === nomeBoneca);
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>

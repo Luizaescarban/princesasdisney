@@ -20,10 +20,11 @@ createApp({
   },
   methods: {
     comprar(boneca) {
-      if (boneca.estoque > 0) {
-        boneca.estoque--;
-        alert(`Você comprou a boneca ${boneca.nome}!`);
-      }
+      alert(`Você comprou: ${boneca.nome}`);
+    },
+    irParaDetalhes(boneca) {
+      // Redirecionar para uma página de detalhes passando o nome como parâmetro (ex: detalhes.html?nome=Cinderela)
+      window.location.href = `detalhes.html?nome=${encodeURIComponent(boneca.nome)}`;
     }
   }
 }).mount('#app');

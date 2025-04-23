@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/style.css" />
     <title>Crochesas</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    
-</head>
-<body>
+  </head>
+  <body>
     <div id="app">
-    <header class="header">
-        <div class="desconto"><p>Discount 20% For New Member, ONLY FOR TODAY!!</p></div>
+      <header class="header">
+        <div class="desconto">
+          <p>Discount 20% For New Member, ONLY FOR TODAY!!</p>
+        </div>
         <div class="nav">
-            <div class="logo"><img src="assets/images/logo.png" alt=""></div>
-            <div class="car"><img src="assets/images/car.png" alt=""></div>
+          <div class="logo"><img src="assets/images/logo.png" alt="" /></div>
+          <div class="car"><img src="assets/images/car.png" alt="" /></div>
         </div>
-    </header>
-    <main class="main">
+      </header>
+      <main class="main">
         <div class="banner">
-            <div><img src="assets/images/banner.png" alt=""></div>
-            <div><p>BONECAS Disney</p>
-            <p>Crochesas</p></div>
+          <div><img src="assets/images/banner.png" alt="" /></div>
+          <div class="crochesas">
+            <p>Bonecas Disney</p>
+            <p>Crochesas</p>
+          </div>
         </div>
-        <div class="product">  <div class="card" v-for="boneca in bonecas" :key="boneca.nome" :class="{ esgotado: boneca.estoque === 0 }">
-            <img :src="boneca.imagem" :alt="boneca.nome">
+        <div class="product">
+          <div
+            class="card"
+            v-for="boneca in bonecas"
+            :key="boneca.nome"
+            :class="{ esgotado: boneca.estoque === 0 }"
+            @click="irParaDetalhes(boneca)"
+            style="cursor: pointer"
+          >
+            <img :src="boneca.imagem" :alt="boneca.nome" />
             <div class="info">
               <h2>{{ boneca.nome }}</h2>
               <p class="preco">R$ {{ boneca.preco.toFixed(2) }}</p>
@@ -32,10 +43,50 @@
                 {{ boneca.estoque > 0 ? 'Em estoque' : 'Esgotado' }}
               </p>
 
-              <button @click="comprar(boneca)" :disabled="boneca.estoque === 0">Comprar</button>
-            </div></div>
+              <button @click="comprar(boneca)" :disabled="boneca.estoque === 0">
+                Comprar
+              </button>
+            </div>
           </div>
-    </main></div>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="croche">
+          <div class="crochesas">Crochesas</div>
+          <div>
+            <p>WhatsApp: : +62 859 9999 999</p>
+            <p>Email: : hello@modeva.com</p>
+            <p>
+              Adress: : Lorem ipsum street Block B Number 08, Jakarta,
+              Indonesia, 12345
+            </p>
+          </div>
+        </div>
+        <div class="Adress">
+          <div class="text">
+            <h3>Menu</h3>
+            <p>Sale</p>
+            <p>New arrivals</p>
+            <p>Formal Man</p>
+            <p>Formal Woman</p>
+            <p>Casual Men </p>
+          </div>
+          <div class="text">
+            <h3>Get Help</h3>
+            <p>FAQ</p>
+            <p>Customer Service</p>
+            <p>Refund and return</p>
+            <p>Terms and Conditions</p>
+          </div>
+          <div class="text">
+            <h3>Account</h3>
+            <p>My Account</p>
+            <p>My Orders</p>
+            <p>Vouchers and Discounts</p>
+          </div>
+        </div>
+      </footer>
+    </div>
     <script src="js/app.js"></script>
-</body>
+  </body>
 </html>
