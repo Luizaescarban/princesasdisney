@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
+  <title>Carrinho de Compras</title>
+  <link rel="stylesheet" href="assets/carrinho.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div class="desconto">
+        <p>Discount 20% For New Member, ONLY FOR TODAY!!</p>
+      </div>
+      <div class="nav">
+        <div class="logo"><img @click="voltar" src="assets/images/logo.png" alt="" /></div>
+        <div class="car"><img @click="irParaCarrinho" src="assets/images/car.png" alt="" /></div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div v-if="carrinho.length > 0" class="itens">
+        <div class="pedidos">
+        <div v-for="(item, index) in carrinho" :key="index" class="item-carrinho">
+          <div class="product"> <div class="img"><img :src="item.imagem" :alt="item.nome" style="max-width: 100px;"></div>
+          <div class="detalhes">
+            <h3>{{ item.nome }}</h3>
+            <p>Preço: R$ {{ item.preco.toFixed(2) }}</p>
+             <p>Total: R$ {{ (item.preco * item.quantidade).toFixed(2) }}</p>
+          </div></div>
+         
+          <div class="total">
+           
+          
+          <button @click="removerItem(index)">Remover</button></div>
+        </div>
+</div>
+        <div class="resumo">
+          <div class="divPreco"> <p>Total</p> <p> R$ {{ totalCarrinho.toFixed(2) }}</p></div>
+         
+          <button @click="finalizarCompra">FINALIZAR</button>
+        </div>
+      </div>
+
+      <div v-else>
+        <p>Seu carrinho está vazio.</p>
+        <button @click="voltar">Voltar</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="croche">
+        <div class="crochesas">Crochesas</div>
+        <div>
+          <p>WhatsApp: : +62 859 9999 999</p>
+          <p>Email: : hello@modeva.com</p>
+          <p>
+            Adress: : Lorem ipsum street Block B Number 08, Jakarta,
+            Indonesia, 12345
+          </p>
+        </div>
+      </div>
+      <div class="Adress">
+        <div class="text">
+          <h3>Menu</h3>
+          <p>Sale</p>
+          <p>New arrivals</p>
+          <p>Formal Man</p>
+          <p>Formal Woman</p>
+          <p>Casual Men </p>
+        </div>
+        <div class="text">
+          <h3>Get Help</h3>
+          <p>FAQ</p>
+          <p>Customer Service</p>
+          <p>Refund and return</p>
+          <p>Terms and Conditions</p>
+        </div>
+        <div class="text">
+          <h3>Account</h3>
+          <p>My Account</p>
+          <p>My Orders</p>
+          <p>Vouchers and Discounts</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            carrinho: [],
+          };
+        },
+        computed: {
+          totalCarrinho() {
+            return this.carrinho.reduce((total, item) => total + item.preco * item.quantidade, 0);
+          },
+        },
+        methods: {
+          voltar() {
+            window.location.href = "index.html"; // Redireciona para a página principal ou para uma outra página
+          },
+          irParaCarrinho() {
+            window.location.href = "carrinho.html"; // Permite navegar para a página do carrinho
+          },
+          removerItem(index) {
+            this.carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+          },
+          finalizarCompra() {
+            alert("Compra finalizada!");
+            this.carrinho = []; // Limpa o carrinho após a compra
+            localStorage.setItem('carrinho', JSON.stringify(this.carrinho));
+          },
+        },
+        mounted() {
+          // Recupera o carrinho do localStorage
+          const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || [];
+          this.carrinho = carrinhoSalvo;
+        },
+      }).mount('#app');
+    </script>
+  </div>
+</body>
+</html>

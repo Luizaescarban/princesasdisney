@@ -3,6 +3,7 @@ body{
     margin: 0px;
 
 }
+
 .desconto{
     background-color: #FA77AB;
     color: white;
@@ -24,29 +25,101 @@ body{
     width: 100px;
     height: 100px;
 }
-main{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 50px;
-}
-.detalhes{
+.banner{
     display: flex;
     flex-direction: row;
-    padding: 10px 200px 10px 350px;
+    background-color: #FF9DC4;
+    padding: 1rem;
+    padding-bottom: 0px;
     justify-content: center;
-    font-family: "Playfair Display SC", serif;
-}
-.img{
-    margin-right: 50px;
-    display: flex;
     align-items: center;
 }
-.croche{
+.banner img{
+  width: 400px;
+  height: 350px;
+}
+.main{
     display: flex;
     flex-direction: column;
+
+    padding-bottom: 50px;
+}
+.itens{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.item-carrinho{
+    font-family: "Lato", sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+.total{
+    display: flex;
+    flex-direction: row;
+}
+.total button{
+    border: 0px;
+    text-decoration: underline;
+    background-color: white;
+
+}
+.product{
+    display: flex ;
+    flex-direction: row;
+    align-items: center;
+}
+.pedidos{
+    display: flex;
+    flex-direction: column;
+}
+.img{
+    margin-right: 20px;
+
+}
+
+.detalhes h3{
+    font-size: 30px;
+}
+.detalhes p{
+   font-size: 15px;
+}
+.resumo{
+    border: 1px solid black;
+    height: 98px;
+}
+.divPreco{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: "Lato", sans-serif;
+}
+.resumo button{
+    border: 0px;
+    padding: 12px 8px;
+    width: 300px;
+    height: 48px;
+    background-color: #FA77AB;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    gap: 40px;
+    font-family: "Lato", sans-serif;
   }
-  .footer{
+ 
+.resumo button:hover{
+
+        background-color: #f05895;
+    
+   
+} 
+
+.footer{
     background-color: #FA77AB;
     color: black;
     padding: 20px;
@@ -61,68 +134,4 @@ main{
   .Adress{
     display: flex;
     flex-direction: row;
-  }
-  .crochesas{
-    font-family: "Pinyon Script", cursive;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 50px;
-  }
-
-  .nome{
-    font-size: 60px;
-  }
-  .txt{
-    display: flex;
-    flex-direction: column;
-  }
-  .preco{
-    color: red
-    ;
-    font-size: 20px;
-    font-family: "Lato", sans-serif;
-  }
-  .estoque{
-    font-size: 10px;
-    font-family: "Lato", sans-serif;
-  }
-  .adicionar{
-    display: flex;
-    flex-direction: row;
-
-  }
-  .botao{
-    border: 1px solid black;
-    padding: 12px 8px;
-    width: 158px;
-    height: 20px;
-    gap: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  .descricao{
-    font-family: "Lato", sans-serif;
-  }
-  .adicionar button{
-    border: none;
-  }
-  .addCar{
-    border: 1px solid black;
-    padding: 12px 8px;
-    width: 300px;
-    height: 48px;
-    background-color: #FA77AB;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: black;
-    gap: 40px;
-  }
- 
-  .addCar:hover{
-    background-color: #f05895;
-
   }

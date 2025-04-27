@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/style.css" />
+    <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
     <title>Crochesas</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
@@ -14,8 +15,8 @@
           <p>Discount 20% For New Member, ONLY FOR TODAY!!</p>
         </div>
         <div class="nav">
-          <div class="logo"><img src="assets/images/logo.png" alt="" /></div>
-          <div class="car"><img src="assets/images/car.png" alt="" /></div>
+          <div class="logo"><img @click="voltar" src="assets/images/logo.png" alt="" /></div>
+          <div class="car"><img @click="irParaCarrinho" src="assets/images/car.png" alt="" /></div>
         </div>
       </header>
       <main class="main">
@@ -87,6 +88,43 @@
         </div>
       </footer>
     </div>
-    <script src="js/app.js"></script>
+    <script >
+      const { createApp } = Vue;
+
+createApp({
+  data() {
+    return {
+      mostrar: true,
+      bonecas: [
+        { nome: 'Ariel', preco: 89.90, imagem: 'assets/images/ariel.png', estoque: 5 },
+        { nome: 'Bela', preco: 99.90, imagem: 'assets/images/bela.png', estoque: 0 },
+        { nome: 'Cinderela', preco: 89.90, imagem: 'assets/images/cinderela.png', estoque: 3 },
+        { nome: 'Aurora', preco: 109.90, imagem: 'assets/images/aurora.png', estoque: 2 },
+        { nome: 'Branca de Neve', preco: 109.90, imagem: 'assets/images/brancadeneve.png', estoque: 4 },
+        { nome: 'Rapunzel', preco: 95.90, imagem: 'assets/images/rapunzel.png', estoque: 1 },
+        { nome: 'Jasmine', preco: 89.90, imagem: 'assets/images/jasmine.png', estoque: 0 },
+        { nome: 'Merida', preco: 99.90, imagem: 'assets/images/merida.png', estoque: 2 },
+        { nome: 'Mulan', preco: 109.90, imagem: 'assets/images/mulan.png', estoque: 3 },
+        { nome: 'Tiana', preco: 89.90, imagem: 'assets/images/tiana.png', estoque: 5 }
+      ]
+    };
+  },
+  methods: {
+    comprar(boneca) {
+      alert(`Você comprou: ${boneca.nome}`);
+    },
+    irParaDetalhes(boneca) {
+  
+      window.location.href = `detalhes.html?nome=${encodeURIComponent(boneca.nome)}`;
+    },
+    irParaCarrinho() {
+      window.location.href = "carrinho.html";
+    },
+      voltar() {
+       window.location.href = "index.html";
+      },
+  }
+}).mount('#app');
+    </script>
   </body>
 </html>

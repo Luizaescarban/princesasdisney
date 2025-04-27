@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
   <title>Detalhes da Boneca</title>
   <link rel="stylesheet" href="assets/detalhes.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -12,40 +13,40 @@
     <header class="header">
         <div class="desconto"><p>Discount 20% For New Member, ONLY FOR TODAY!!</p></div>
         <div class="nav">
-            <div class="logo"><img src="assets/images/logo.png" alt=""></div>
-            <div class="car"><img src="assets/images/car.png" alt=""></div>
+          <div class="logo"><img @click="voltar" src="assets/images/logo.png" alt="" /></div>
+            <div class="car"><img @click="irParaCarrinho" src="assets/images/car.png" alt="" /></div>
         </div>
     </header>
     <main>
         <div class="detalhes" v-if="boneca">
 
             <div class="img"><img :src="boneca.imagem" :alt="boneca.nome" style="max-width: 300px;"></div>
-            <div> <h1>{{ boneca.nome }}</h1>
+            <div class="txt"> <h1 class="nome">{{ boneca.nome}}</h1>
             
-            <p>Preço: R$ {{ boneca.preco.toFixed(2) }}</p>
-            <p>Status: 
+            <p class="preco">R$ {{ boneca.preco.toFixed(2) }}</p>
+            <p class="estoque">Status: 
               <span :class="boneca.estoque > 0 ? 'disponivel' : 'indisponivel'">
                 {{ boneca.estoque > 0 ? 'Em estoque' : 'Esgotado' }}
               </span>
             </p>
-            <p>{{ boneca.descricao }}</p>
+            <p class="descricao">{{ boneca.descricao }}</p>
 
-            <div style="margin: 20px 0; display: flex; align-items: center; gap: 10px;">
-              <button @click="decrementar" :disabled="quantidade === 0">-</button>
-              <span>{{ quantidade }}</span>
-              <button @click="incrementar" :disabled="quantidade >= boneca.estoque">+</button>
-            </div>
+            <div class="adicionar" style="margin: 20px 0; display: flex; align-items: center; gap: 10px;">
+              <div class="botao"><button  @click="decrementar" :disabled="quantidade === 0">-</button>
+                <span>{{ quantidade }}</span>
+                <button @click="incrementar" :disabled="quantidade >= boneca.estoque">+</button></div>
+              
+            
 
-            <button 
+            <button class="addCar"
               @click="adicionarAoCarrinho" 
               :disabled="quantidade === 0 || boneca.estoque === 0"
             >
-              Adicionar ao Carrinho
+              ADICIONAR
             </button>
           
-            <button @click="voltar">Voltar</button>
           </div>
-        </div>
+        </div></div>
            
     <div v-else>
       <p>Boneca não encontrada.</p>
@@ -100,22 +101,25 @@
         boneca: null,
         quantidade: 0,
         todasBonecas: [
-          { nome: 'Ariel', preco: 89.90, imagem: 'assets/images/ariel.png', estoque: 5, descricao: `História/Origem: Ariel é uma sereia curiosa...` },
-          { nome: 'Bela', preco: 99.90, imagem: 'assets/images/bela.png', estoque: 0, descricao: 'História/Origem: Bela é uma jovem...' },
-          { nome: 'Cinderela', preco: 89.90, imagem: 'assets/images/cinderela.png', estoque: 3, descricao: 'Cinderela vive com a madrasta...' },
-          { nome: 'Aurora', preco: 109.90, imagem: 'assets/images/aurora.png', estoque: 2, descricao: 'História/Origem: Aurora é uma princesa...' },
-          { nome: 'Branca de Neve', preco: 109.90, imagem: 'assets/images/brancadeneve.png', estoque: 4, descricao: 'História/Origem: A rainha malvada...' },
-          { nome: 'Rapunzel', preco: 95.90, imagem: 'assets/images/rapunzel.png', estoque: 1, descricao: 'História/Origem: Rapunzel é uma princesa...' },
-          { nome: 'Jasmine', preco: 89.90, imagem: 'assets/images/jasmine.png', estoque: 0, descricao: 'História/Origem: Jasmine é a princesa...' },
-          { nome: 'Merida', preco: 99.90, imagem: 'assets/images/merida.png', estoque: 2, descricao: 'História/Origem: Merida é a princesa...' },
-          { nome: 'Mulan', preco: 109.90, imagem: 'assets/images/mulan.png', estoque: 3, descricao: 'História/Origem: Mulan é uma jovem chinesa...' },
-          { nome: 'Tiana', preco: 89.90, imagem: 'assets/images/tiana.png', estoque: 5, descricao: 'História/Origem: Tiana é uma jovem trabalhadora...' }
+          { nome: 'Ariel', preco: 89.90, imagem: 'assets/images/ariel.png', estoque: 5, descricao: `Ariel é uma sereia curiosa que sonha em viver no mundo dos humanos. Ela se apaixona pelo Príncipe Eric e faz um acordo com a bruxa do mar, Úrsula, trocando sua voz por pernas. Ariel enfrenta muitos desafios para conquistar o amor verdadeiro e recuperar sua voz, até finalmente conquistar seu lugar ao lado do príncipe.` },
+          { nome: 'Bela', preco: 99.90, imagem: 'assets/images/bela.png', estoque: 0, descricao: 'Bela é uma jovem inteligente e apaixonada por livros que se sacrifica para salvar seu pai. Ela acaba vivendo no castelo da Fera, onde descobre que, por trás de uma aparência assustadora, há um coração bondoso. Com o tempo, o amor verdadeiro entre eles quebra o feitiço e restaura a humanidade da Fera.' },
+          { nome: 'Cinderela', preco: 89.90, imagem: 'assets/images/cinderela.png', estoque: 3, descricao: 'Cinderela vive com a madrasta e as meias-irmãs, sendo forçada a trabalhar. Impedida de ir ao baile do príncipe, recebe ajuda da Fada-madrinha, que a transforma para a ocasião, com a condição de voltar antes da meia-noite.' },
+          { nome: 'Aurora', preco: 109.90, imagem: 'assets/images/aurora.png', estoque: 2, descricao: 'Aurora é uma princesa que, ao nascer, recebe bênçãos das fadas, mas também é amaldiçoada por Malévola: ao completar 16 anos, ela picaria o dedo em uma roca e cairia em sono profundo. A maldição se cumpre, mas Aurora é salva pelo beijo de amor verdadeiro do Príncipe Phillip.' },
+          { nome: 'Branca de Neve', preco: 109.90, imagem: 'assets/images/brancadeneve.png', estoque: 4, descricao: 'A rainha malvada morre de ciúmes da beleza de Branca de Neve e manda matá-la. Logo, descobre que a jovem não morreu e está morando na floresta com sete amiguinhos. A princesa então é envenenada pela rainha e só o beijo de um príncipe pode salvá-la.' },
+          { nome: 'Rapunzel', preco: 95.90, imagem: 'assets/images/rapunzel.png', estoque: 1, descricao: 'Rapunzel é uma princesa com longos cabelos mágicos que, após ser sequestrada ainda bebê, é mantida em uma torre pela bruxa Gothel. Ao descobrir o mundo exterior, ela se junta a Flynn Rider e, com coragem e determinação, quebra o feitiço, reconquistando sua liberdade e seu lugar no reino.' },
+          { nome: 'Jasmine', preco: 89.90, imagem: 'assets/images/jasmine.png', estoque: 0, descricao: 'Jasmine é a princesa do reino de Agrabah e sonha em ter liberdade para viver além dos muros do palácio. Ela conhece Aladdin, um jovem humilde que, com a ajuda de um gênio, tenta conquistá-la. Corajosa e determinada, Jasmine prova que pode tomar as próprias decisões e lutar pelo que acredita.' },
+          { nome: 'Merida', preco: 99.90, imagem: 'assets/images/merida.png', estoque: 2, descricao: 'Merida é a princesa do reino de Dunbroch, na Escócia. Aventureira e independente, ela desafia as tradições ao se recusar a casar contra sua vontade. Após um feitiço sair do controle, ela precisa usar sua coragem e inteligência para salvar sua mãe e unir o reino novamente.' },
+          { nome: 'Mulan', preco: 109.90, imagem: 'assets/images/mulan.png', estoque: 3, descricao: 'Mulan é uma jovem chinesa que, para salvar seu pai doente, se disfarça de homem e se junta ao exército no lugar dele. Com muita coragem, inteligência e determinação, ela enfrenta grandes desafios e acaba salvando a China, provando que uma verdadeira heroína não precisa seguir padrões.' },
+          { nome: 'Tiana', preco: 89.90, imagem: 'assets/images/tiana.png', estoque: 5, descricao: 'Tiana é uma jovem trabalhadora de Nova Orleans que sonha em abrir seu próprio restaurante. Ao beijar um príncipe transformado em sapo, ela também se transforma e embarca em uma aventura no bayou. Com esforço, coragem e amor verdadeiro, ela quebra o feitiço e realiza seus sonhos.' }
         ]
       };
     },
     methods: {
+      irParaCarrinho() {
+      window.location.href = "carrinho.html";
+    },
       voltar() {
-        window.history.back();
+       window.location.href = "index.html";
       },
       getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -132,11 +136,35 @@
         }
       },
       adicionarAoCarrinho() {
-        if (this.quantidade > 0 && this.boneca.estoque >= this.quantidade) {
-          alert(`${this.quantidade}x ${this.boneca.nome} adicionada(s) ao carrinho!`);
-          this.quantidade = 0; // reseta após adicionar
-        }
-      }
+  if (this.quantidade > 0 && this.boneca.estoque >= this.quantidade) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+    // Verifica se a boneca já está no carrinho
+    const produtoExistente = carrinho.find(item => item.nome === this.boneca.nome);
+
+    if (produtoExistente) {
+      // Se já existe, só aumenta a quantidade
+      produtoExistente.quantidade += this.quantidade;
+    } else {
+      // Se não, adiciona novo produto
+      carrinho.push({
+        nome: this.boneca.nome,
+        preco: this.boneca.preco,
+        imagem: this.boneca.imagem,
+        quantidade: this.quantidade
+      });
+    }
+
+    // Atualiza o localStorage
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+    alert(`${this.quantidade}x ${this.boneca.nome} adicionada(s) ao carrinho!`);
+
+    // reseta quantidade
+    this.quantidade = 0;
+  }
+}
+   
     },
     mounted() {
       const nomeBoneca = this.getQueryParam('nome');
